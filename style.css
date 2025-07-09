@@ -36,20 +36,27 @@ body {
     width: 100%;
     height: 100%;
     perspective: 1000px;
+    overflow: hidden;
 }
 
-.envelope-back,
-.envelope-front {
+.envelope-back {
     position: absolute;
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, #ff69b4, #ff1493, #db7093);
-    border-radius: 10px;
+    border-radius: 0;
     box-shadow: 0 10px 30px rgba(219, 112, 147, 0.3);
+    z-index: 1;
 }
 
 .envelope-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(135deg, #ffb3d9, #ff69b4, #ff1493);
+    border-radius: 0;
+    z-index: 2;
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 100%, 0 60%);
 }
 
 .envelope-flap {
@@ -57,22 +64,22 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 50%;
+    height: 60%;
     background: linear-gradient(135deg, #ff1493, #db7093, #c71585);
-    transform-origin: bottom center;
+    transform-origin: 50% 60%;
     transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    border-radius: 10px 10px 0 0;
     z-index: 10;
     box-shadow: 0 5px 15px rgba(199, 21, 133, 0.4);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 
 .envelope-flap::before {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background: #fff;
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -82,17 +89,17 @@ body {
 /* Card Styling */
 .card {
     position: absolute;
-    top: 25%;
-    left: 10%;
-    width: 80%;
-    height: 120%;
+    top: 40%;
+    left: 50%;
+    width: 70%;
+    height: 50%;
     background: #fff;
-    border-radius: 15px;
-    transform: translateY(0);
+    border-radius: 10px;
+    transform: translateX(-50%) translateY(20px);
     transition: transform 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     transform-style: preserve-3d;
-    z-index: 5;
+    z-index: 3;
 }
 
 .card-front,
@@ -101,7 +108,7 @@ body {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 15px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -109,13 +116,13 @@ body {
 
 .card-front {
     background: linear-gradient(135deg, #fff, #ffe4e6, #ffccd5);
-    border: 3px solid #ff69b4;
+    border: 2px solid #ff69b4;
 }
 
 .card-back {
     background: linear-gradient(135deg, #fff, #fef7f0);
     transform: rotateY(180deg);
-    padding: 20px;
+    padding: 15px;
 }
 
 .card-decoration {
@@ -124,13 +131,13 @@ body {
 }
 
 .heart {
-    font-size: 40px;
-    margin-bottom: 10px;
+    font-size: 30px;
+    margin-bottom: 8px;
     animation: heartbeat 2s ease-in-out infinite;
 }
 
 .card-text {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     color: #c71585;
     text-shadow: 1px 1px 2px rgba(199, 21, 133, 0.2);
@@ -143,25 +150,25 @@ body {
     display: flex;
     flex-direction: column;
     color: #333;
-    font-size: 12px;
-    line-height: 1.6;
+    font-size: 10px;
+    line-height: 1.4;
 }
 
 .letter-header {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: bold;
     color: #c71585;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     text-align: center;
 }
 
 .letter-content {
     flex: 1;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 }
 
 .letter-content p {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     text-align: justify;
 }
 
@@ -170,6 +177,7 @@ body {
     font-style: italic;
     color: #ff1493;
     font-weight: bold;
+    font-size: 9px;
 }
 
 /* Instructions */
@@ -188,12 +196,12 @@ body {
 }
 
 .card.pulled-out {
-    transform: translateY(-60px);
+    transform: translateX(-50%) translateY(-80px);
     z-index: 15;
 }
 
 .card.opened {
-    transform: translateY(-60px) rotateY(180deg);
+    transform: translateX(-50%) translateY(-80px) rotateY(180deg);
 }
 
 /* Keyframe Animations */
